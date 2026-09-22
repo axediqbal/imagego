@@ -466,11 +466,46 @@ document.addEventListener('DOMContentLoaded', () => {
       settingsModal.classList.add('hidden');
     });
 
+    // Mobile Hamburger Navigation Menu Toggle
+    const navHamburgerBtn = document.getElementById('navHamburgerBtn');
+    const mainNavbar = document.getElementById('mainNavbar') || document.querySelector('.main-navbar');
+    const navLinksMenu = document.getElementById('navLinksMenu');
+
+    if (navHamburgerBtn && mainNavbar) {
+      navHamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = mainNavbar.classList.toggle('nav-open');
+        navHamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // Close mobile menu when clicking any link
+      if (navLinksMenu) {
+        navLinksMenu.querySelectorAll('.nav-link').forEach((link) => {
+          link.addEventListener('click', () => {
+            mainNavbar.classList.remove('nav-open');
+            navHamburgerBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mainNavbar.contains(e.target)) {
+          mainNavbar.classList.remove('nav-open');
+          navHamburgerBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
     // Keyboard Shortcuts
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         lightboxModal.classList.add('hidden');
         settingsModal.classList.add('hidden');
+        if (mainNavbar) {
+          mainNavbar.classList.remove('nav-open');
+          if (navHamburgerBtn) navHamburgerBtn.setAttribute('aria-expanded', 'false');
+        }
       }
       if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
         if (!state.isGenerating) handleGenerate();

@@ -882,6 +882,23 @@ body.docs-body {
 }
 
 @media (max-width: 480px) {
+  .nav-container {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  .brand-name {
+    font-size: 16px;
+  }
+  .docs-nav-tag {
+    display: none;
+  }
+  .nav-right-actions {
+    gap: 6px;
+  }
+  .nav-config-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
   .top-announcement-bar {
     padding: 8px 10px;
     font-size: 11px;

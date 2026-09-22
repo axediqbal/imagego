@@ -39,7 +39,7 @@
   </div>
 
   <!-- Sticky Glass Navbar (Imagenerator Style) -->
-  <header class="main-navbar">
+  <header class="main-navbar" id="mainNavbar">
     <div class="nav-container">
       <a href="/" class="brand-logo">
         <div class="logo-icon-wrap">
@@ -52,8 +52,8 @@
         <span class="brand-name">ImageGo<span class="brand-dot">.</span></span>
       </a>
 
-      <!-- Center Nav Links -->
-      <nav class="nav-links-menu">
+      <!-- Center Nav Links (Desktop Menu & Mobile Drawer) -->
+      <nav class="nav-links-menu" id="navLinksMenu" aria-label="Primary Navigation">
         <a href="#studio-section" class="nav-link active">Studio</a>
         <a href="#gallery-section" class="nav-link">Creations</a>
         <a href="#specs-section" class="nav-link">Specifications</a>
@@ -62,12 +62,12 @@
 
       <!-- Right Nav Status & Actions -->
       <div class="nav-right-actions">
-        <div class="engine-status-pill">
+        <div class="engine-status-pill" id="navEnginePill" title="Active AI Engine">
           <span class="live-dot"></span>
           <span class="engine-label">Engine:</span>
           <span class="engine-val" id="navEngineName">Pollinations Flux AI</span>
         </div>
-        <button class="nav-config-btn" id="openSettingsBtn" title="Settings">
+        <button class="nav-config-btn" id="openSettingsBtn" title="Settings & API Keys">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="3"></circle>
             <path
@@ -75,6 +75,13 @@
             </path>
           </svg>
           <span>Config</span>
+        </button>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="nav-hamburger-btn" id="navHamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="navLinksMenu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </button>
       </div>
     </div>
