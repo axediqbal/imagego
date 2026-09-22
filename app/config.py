@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     ai_provider: Literal["pollinations", "mock", "openai", "stability"] = "pollinations"
     openai_api_key: Optional[str] = None
     stability_api_key: Optional[str] = None
+    supabase_url: Optional[str] = None
+    supabase_key: Optional[str] = None
+    supabase_bucket: str = "artwork-images"
+    supabase_table: str = "artworks"
     host: str = "127.0.0.1"
     port: int = 8000
     max_retries: int = 3

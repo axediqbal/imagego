@@ -21,6 +21,7 @@ from app.services.providers.stability_provider import StabilityProvider
 from app.services.prompt_intelligence import PromptIntelligenceEngine
 from app.services.prompt_agent import PromptUnderstandingAgent
 from app.services.verifier import BrokenDataStreamError, verify_image_stream
+from app.services.supabase_service import supabase_service
 
 logger = logging.getLogger(__name__)
 
@@ -189,16 +190,31 @@ class ImageGenerationService:
                 file_path = self.output_dir / filename
                 meta_path = self.output_dir / meta_filename
 
-                # Save verified image
+                # Save verified image to local outputs directory
                 verified_image.save(file_path, format="PNG")
                 file_size = file_path.stat().st_size
 
                 created_iso = datetime.now(timezone.utc).isoformat()
+                final_url = f"/api/outputs/{filename}"
+
+                # If Supabase is connected, upload to Supabase Storage and get CDN URL
+                if supabase_service.is_configured:
+                    try:
+                        with open(file_path, "rb") as img_f:
+                            cloud_url = await supabase_service.upload_image_bytes(
+                                filename=filename,
+                                image_bytes=img_f.read(),
+                                content_type="image/png",
+                            )
+                            if cloud_url:
+                                final_url = cloud_url
+                    except Exception as sb_err:
+                        logger.warning("Supabase storage upload failed: %s. Falling back to local URL.", str(sb_err))
 
                 artifact = ImageArtifact(
                     id=artifact_id,
                     filename=filename,
-                    url=f"/api/outputs/{filename}",
+                    url=final_url,
                     prompt=request.prompt,
                     negative_prompt=request.negative_prompt,
                     aspect_ratio=request.aspect_ratio.value,
@@ -214,6 +230,13 @@ class ImageGenerationService:
                 # Save metadata companion JSON file
                 with open(meta_path, "w", encoding="utf-8") as f:
                     json.dump(artifact.model_dump(), f, indent=2)
+
+                # If Supabase is connected, sync metadata record to Supabase PostgreSQL table
+                if supabase_service.is_configured:
+                    try:
+                        await supabase_service.insert_artwork_record(artifact.model_dump())
+                    except Exception as sb_db_err:
+                        logger.warning("Supabase table insert failed: %s", str(sb_db_err))
 
                 return artifact, retries_used
 
@@ -243,9 +266,41 @@ class ImageGenerationService:
         raise RuntimeError("Generation loop exited unexpectedly without result.")
 
     def get_history(self) -> list[ImageArtifact]:
-        """Load list of previously generated and verified image artifacts from outputs directory."""
-        history: list[ImageArtifact] = []
+        """Load list of previously generated and verified image artifacts from Supabase DB or outputs directory."""
+        # 1. If Supabase is configured, fetch from cloud database
+        if supabase_service.is_configured:
+            try:
+                cloud_records = supabase_service.fetch_history(limit=50)
+                if cloud_records:
+                    cloud_history: list[ImageArtifact] = []
+                    for row in cloud_records:
+                        try:
+                            cloud_history.append(
+                                ImageArtifact(
+                                    id=row.get("id"),
+                                    filename=row.get("filename") or f"{row.get('id')}.png",
+                                    url=row.get("url"),
+                                    prompt=row.get("prompt"),
+                                    negative_prompt=row.get("negative_prompt"),
+                                    aspect_ratio=row.get("aspect_ratio", "16:9"),
+                                    width=row.get("width", 1344),
+                                    height=row.get("height", 768),
+                                    format="PNG",
+                                    style=row.get("style", "cinematic"),
+                                    created_at=row.get("created_at"),
+                                    retry_count=row.get("retry_count", 0),
+                                    file_size_bytes=row.get("file_size_bytes", 0),
+                                )
+                            )
+                        except Exception as parse_err:
+                            logger.warning("Error parsing cloud row: %s", str(parse_err))
+                    if cloud_history:
+                        return cloud_history
+            except Exception as e:
+                logger.warning("Could not fetch cloud history from Supabase: %s. Falling back to local.", str(e))
 
+        # 2. Fall back to local outputs directory
+        history: list[ImageArtifact] = []
         if not self.output_dir.exists():
             return history
 
@@ -261,14 +316,24 @@ class ImageGenerationService:
 
     def delete_artifact(self, identifier: str) -> bool:
         """
-        Delete an image artifact and its metadata companion file.
+        Delete an image artifact and its metadata companion file from Supabase and local storage.
         identifier can be an artifact id or filename (e.g. 'uuid' or 'uuid.png').
         """
         clean_id = identifier.replace(".png", "").replace(".json", "")
+        deleted = False
+
+        # 1. Delete from Supabase if configured
+        if supabase_service.is_configured:
+            try:
+                supabase_service.delete_record_and_file(clean_id)
+                deleted = True
+            except Exception as sb_del_err:
+                logger.warning("Supabase delete failed: %s", str(sb_del_err))
+
+        # 2. Delete from local disk
         png_path = self.output_dir / f"{clean_id}.png"
         json_path = self.output_dir / f"{clean_id}.json"
 
-        deleted = False
         if png_path.exists():
             png_path.unlink()
             deleted = True
