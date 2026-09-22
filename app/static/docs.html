@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Documentation // ImageGo Multimodal Studio</title>
+  <meta name="description" content="REST API documentation for ImageGo Multimodal Studio with aspect ratio pixel mapping and Pillow stream integrity verification." />
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="/static/css/style.css?v=9.0" />
+  <link rel="stylesheet" href="/static/css/docs.css?v=2.0" />
+</head>
+<body class="docs-body">
+  <!-- Astronaut Orbit Ambient Background (User-Uploaded Photo) -->
+  <div class="docs-bg-container">
+    <img src="/static/assets/orbit_astronaut.jpg" alt="Astronaut Spacewalk in Earth Orbit" class="docs-bg-img" />
+    <div class="docs-bg-scrim"></div>
+  </div>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement-bar">
+    <div class="announcement-content">
+      <span class="announcement-pill">IMAGEGO API</span>
+      <span class="announcement-text">Multimodal REST Specification • Aspect Ratio Pixel Payload Mapping • Pillow Integrity Gate</span>
+      <a href="/" class="announcement-link">← Return to Studio</a>
+    </div>
+  </div>
+
+  <!-- Sticky Glass Navbar -->
+  <header class="main-navbar">
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <div class="logo-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        </div>
+        <span class="brand-name">ImageGo<span class="brand-dot">.</span> <span class="docs-nav-tag">API Docs</span></span>
+      </a>
+
+      <!-- Center Status Capsule -->
+      <div class="nav-center-pill">
+        <span class="live-dot"></span>
+        <span class="nav-pill-label">Base URL:</span>
+        <span class="nav-pill-val">http://127.0.0.1:8000</span>
+      </div>
+
+      <!-- Right Nav Actions -->
+      <div class="nav-right-actions">
+        <a href="/" class="nav-config-btn" title="Back to Creation Studio">
+          <span>← Studio</span>
+        </a>
+        <a href="/swagger" class="nav-config-btn" title="Raw Swagger UI">
+          <span>Raw Swagger UI</span>
+        </a>
+        <a href="/openapi.json" target="_blank" class="nav-config-btn" title="OpenAPI JSON Specification">
+          <span>OpenAPI JSON</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main API Docs Portal Container -->
+  <main class="docs-portal-wrapper">
+    <!-- Hero Header -->
+    <section class="docs-hero-header">
+      <div class="studio-pill-tag">
+        <span class="sparkle-glyph">✦</span>
+        <span>INTERACTIVE REST API EXPLORER</span>
+      </div>
+      <h1 class="docs-headline">
+        Multimodal Image Generation <span class="gradient-headline">API Specification</span>
+      </h1>
+      <p class="docs-lead">
+        Comprehensive endpoint documentation for natural language artwork synthesis, strict aspect ratio pixel payloads (<code class="pixel-pill">1920×1080</code>, <code class="pixel-pill">1080×1080</code>, <code class="pixel-pill">1080×1920</code>), multi-engine AI provider dispatch, and Pillow scanline integrity verification.
+      </p>
+      <div class="docs-spec-badges">
+        <span class="spec-pill">FastAPI 0.115+</span>
+        <span class="spec-pill">Pillow 11+</span>
+        <span class="spec-pill">Pydantic v2</span>
+        <span class="spec-pill">Full HD 1080p Standard</span>
+        <span class="spec-pill">Zero-Key Free Engine Available</span>
+      </div>
+    </section>
+
+    <!-- Quick Navigation Anchor Shelf -->
+    <nav class="docs-quick-anchors">
+      <a href="#post-generate" class="anchor-chip"><span class="badge-post">POST</span> /api/generate</a>
+      <a href="#post-optimize" class="anchor-chip"><span class="badge-post">POST</span> /api/prompt/optimize</a>
+      <a href="#get-history" class="anchor-chip"><span class="badge-get">GET</span> /api/history</a>
+      <a href="#delete-history" class="anchor-chip"><span class="badge-post" style="background: rgba(255, 68, 68, 0.2); color: #ff6b6b; border-color: rgba(255,68,68,0.4)">DEL</span> /api/history/{id}</a>
+      <a href="#get-health" class="anchor-chip"><span class="badge-get">GET</span> /api/health</a>
+      <a href="#get-outputs" class="anchor-chip"><span class="badge-get">GET</span> /api/outputs/{filename}</a>
+      <a href="#architecture" class="anchor-chip"><span class="badge-arch">ARCH</span> Integrity Gate</a>
+    </nav>
+
+    <!-- Endpoint Card 1: POST /api/generate -->
+    <article class="doc-endpoint-card" id="post-generate">
+      <div class="endpoint-card-header">
+        <div class="endpoint-title-group">
+          <span class="http-badge post-badge">POST</span>
+          <span class="endpoint-path">/api/generate</span>
+        </div>
+        <span class="endpoint-tagline">Primary Artwork Synthesis Engine</span>
+      </div>
+      <div class="endpoint-card-body">
+        <p class="endpoint-desc">
+          Dispatches natural language prompts to selected generative AI providers (Pollinations Flux, Sana, Turbo, OpenAI DALL-E 3, Stability SDXL, or Mock Engine). Enforces strict aspect ratio pixel dimensions, verifies decoded binary stream via Pillow <code>Image.open().load()</code>, and executes exponential backoff auto-retry upon corrupted streams.
+        </p>
+
+        <!-- Parameters Specs Table -->
+        <div class="params-section">
+          <h4 class="params-heading">Request Body (JSON)</h4>
+          <div class="params-table-wrap">
+            <table class="params-table">
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Type</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>prompt</code></td>
+                  <td><span class="type-string">string</span></td>
+                  <td><span class="req-yes">Yes</span></td>
+                  <td>Natural language prompt describing the artwork (3 to 1000 characters).</td>
+                </tr>
+                <tr>
+                  <td><code>aspect_ratio</code></td>
+                  <td><span class="type-enum">enum</span></td>
+                  <td><span class="req-no">No (default: 1:1)</span></td>
+                  <td>Target aspect ratio: <code>"16:9"</code> (1920×1080), <code>"1:1"</code> (1080×1080), <code>"9:16"</code> (1080×1920).</td>
+                </tr>
+                <tr>
+                  <td><code>provider</code></td>
+                  <td><span class="type-string">string</span></td>
+                  <td><span class="req-no">No (default: pollinations_flux)</span></td>
+                  <td>Target AI engine: <code>pollinations_flux</code>, <code>pollinations_sana</code>, <code>pollinations_turbo</code>, <code>openai</code>, <code>stability</code>, <code>mock</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>enable_ai_enhancer</code></td>
+                  <td><span class="type-bool">boolean</span></td>
+                  <td><span class="req-no">No (default: true)</span></td>
+                  <td>Activates semantic prompt reasoning for high-detail 1080p generation.</td>
+                </tr>
+                <tr>
+                  <td><code>api_key</code></td>
+                  <td><span class="type-string">string</span></td>
+                  <td><span class="req-no">Optional</span></td>
+                  <td>User API key for paid models (OpenAI DALL-E 3 or Stability AI SDXL). Free models require no key.</td>
+                </tr>
+                <tr>
+                  <td><code>style</code></td>
+                  <td><span class="type-enum">enum</span></td>
+                  <td><span class="req-no">No (default: cinematic)</span></td>
+                  <td>Style aesthetic preset: <code>cinematic</code>, <code>photorealistic</code>, <code>cyberpunk</code>, <code>anime</code>, <code>digital_art</code>, <code>vivid</code>, <code>watercolor</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>count</code></td>
+                  <td><span class="type-int">integer</span></td>
+                  <td><span class="req-no">No (default: 1)</span></td>
+                  <td>Batch quantity of artworks to generate (1 to 4).</td>
+                </tr>
+                <tr>
+                  <td><code>negative_prompt</code></td>
+                  <td><span class="type-string">string</span></td>
+                  <td><span class="req-no">Optional</span></td>
+                  <td>Cues to avoid in generation (e.g. blurry, watermark, artifacts).</td>
+                </tr>
+                <tr>
+                  <td><code>simulate_corruption</code></td>
+                  <td><span class="type-bool">boolean</span></td>
+                  <td><span class="req-no">No (default: false)</span></td>
+                  <td>Simulate 1 severed data stream to demonstrate Pillow scanline detection and auto-retry.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Interactive Live Console ("Try It Out") -->
+        <div class="tryout-console-panel">
+          <div class="console-head">
+            <span class="console-title">⚡ Interactive Test Console</span>
+            <span class="console-desc">Execute live generation directly against your local server</span>
+          </div>
+
+          <form id="tryGenerateForm" class="tryout-form-grid">
+            <div class="form-row flex-col">
+              <label for="tryPrompt" class="form-label">Prompt:</label>
+              <textarea id="tryPrompt" class="console-textarea" rows="2">A futuristic cybernetic explorer looking at planet Earth from space station, 8k resolution, cinematic lighting</textarea>
+            </div>
+
+            <div class="form-row-grid">
+              <div class="form-col">
+                <label for="tryRatio" class="form-label">Aspect Ratio:</label>
+                <select id="tryRatio" class="console-select">
+                  <option value="16:9" selected>16:9 Landscape (1344×768 px)</option>
+                  <option value="1:1">1:1 Square (1024×1024 px)</option>
+                  <option value="9:16">9:16 Vertical (768×1344 px)</option>
+                </select>
+              </div>
+
+              <div class="form-col">
+                <label for="tryProvider" class="form-label">AI Engine:</label>
+                <select id="tryProvider" class="console-select">
+                  <option value="pollinations_flux" selected>Pollinations Flux (Free HD)</option>
+                  <option value="pollinations_sana">Pollinations Sana (Free Fast)</option>
+                  <option value="pollinations_turbo">Pollinations Turbo (Free Instant)</option>
+                  <option value="openai">OpenAI DALL-E 3 (Requires Key)</option>
+                  <option value="stability">Stability AI SDXL (Requires Key)</option>
+                  <option value="mock">Local Mock Engine (Offline)</option>
+                </select>
+              </div>
+
+              <div class="form-col">
+                <label for="tryStyle" class="form-label">Style Preset:</label>
+                <select id="tryStyle" class="console-select">
+                  <option value="cinematic" selected>Cinematic</option>
+                  <option value="photorealistic">Photorealistic</option>
+                  <option value="cyberpunk">Cyberpunk</option>
+                  <option value="anime">Anime</option>
+                  <option value="digital_art">Digital Art</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-grid" id="apiKeyRow" style="display: none;">
+              <div class="form-col full-w">
+                <label for="tryApiKey" class="form-label">Custom API Key (Optional if already in .env):</label>
+                <input type="password" id="tryApiKey" class="console-input" placeholder="sk-... (sent directly for this request)" />
+              </div>
+            </div>
+
+            <div class="console-actions">
+              <button type="submit" class="console-execute-btn" id="executeGenerateBtn">
+                <span>Execute POST Request</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+          </form>
+
+          <!-- Live Output Preview Screen -->
+          <div class="console-output-box hidden" id="generateOutputBox">
+            <div class="output-top-bar">
+              <div class="output-status-pill" id="genStatusPill">HTTP 200 OK</div>
+              <div class="output-meta" id="genMetaPill">Latency: 3.8s • Retries: 0</div>
+            </div>
+            <div class="output-split">
+              <pre class="json-code-display"><code id="generateJsonOutput"></code></pre>
+              <div class="output-image-preview hidden" id="generateImagePreview">
+                <img id="previewImgElement" src="" alt="Live Generated Artwork" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code Snippets Showcase -->
+        <div class="code-snippets-tray">
+          <div class="code-nav-tabs">
+            <button type="button" class="tab-btn active" data-tab="curl">cURL</button>
+            <button type="button" class="tab-btn" data-tab="python">Python (httpx)</button>
+            <button type="button" class="tab-btn" data-tab="js">JavaScript (fetch)</button>
+          </div>
+          <div class="tab-pane active" id="tab-curl">
+            <pre class="code-block"><code>curl -X POST "http://127.0.0.1:8000/api/generate" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "An astronaut floating in deep space holding a glowing crystal orb",
+    "aspect_ratio": "16:9",
+    "provider": "pollinations_flux",
+    "style": "cinematic",
+    "count": 1
+  }'</code></pre>
+          </div>
+          <div class="tab-pane" id="tab-python">
+            <pre class="code-block"><code>import httpx
+
+payload = {
+    "prompt": "An astronaut floating in deep space holding a glowing crystal orb",
+    "aspect_ratio": "16:9",
+    "provider": "pollinations_flux",
+    "style": "cinematic",
+    "count": 1
+}
+
+with httpx.Client(base_url="http://127.0.0.1:8000", timeout=60.0) as client:
+    response = client.post("/api/generate", json=payload)
+    result = response.json()
+    print("Generated:", result["images"][0]["url"])</code></pre>
+          </div>
+          <div class="tab-pane" id="tab-js">
+            <pre class="code-block"><code>const response = await fetch("http://127.0.0.1:8000/api/generate", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    prompt: "An astronaut floating in deep space holding a glowing crystal orb",
+    aspect_ratio: "16:9",
+    provider: "pollinations_flux",
+    style: "cinematic",
+    count: 1
+  })
+});
+
+const data = await response.json();
+console.log("Image URL:", data.images[0].url);</code></pre>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Endpoint Card 2: GET /api/history -->
+    <article class="doc-endpoint-card" id="get-history">
+      <div class="endpoint-card-header">
+        <div class="endpoint-title-group">
+          <span class="http-badge get-badge">GET</span>
+          <span class="endpoint-path">/api/history</span>
+        </div>
+        <span class="endpoint-tagline">Verified Artwork Artifact Catalog</span>
+      </div>
+      <div class="endpoint-card-body">
+        <p class="endpoint-desc">
+          Retrieves all successfully synthesized, Pillow scanline-verified artwork assets persisted on disk in <code>outputs/</code> with metadata including width, height, aspect ratio, style, timestamp, and byte size.
+        </p>
+        <button type="button" class="console-execute-btn mini-btn" id="executeHistoryBtn">
+          <span>Execute GET /api/history</span>
+        </button>
+        <div class="console-output-box hidden" id="historyOutputBox">
+          <pre class="json-code-display"><code id="historyJsonOutput"></code></pre>
+        </div>
+      </div>
+    </article>
+
+    <!-- Endpoint Card 3: GET /api/health -->
+    <article class="doc-endpoint-card" id="get-health">
+      <div class="endpoint-card-header">
+        <div class="endpoint-title-group">
+          <span class="http-badge get-badge">GET</span>
+          <span class="endpoint-path">/api/health</span>
+        </div>
+        <span class="endpoint-tagline">Pipeline Health & Supported Models</span>
+      </div>
+      <div class="endpoint-card-body">
+        <p class="endpoint-desc">
+          Returns server readiness status, active AI provider engine, complete list of supported free and paid AI models, maximum retry limit, and output directory state.
+        </p>
+        <button type="button" class="console-execute-btn mini-btn" id="executeHealthBtn">
+          <span>Execute GET /api/health</span>
+        </button>
+        <div class="console-output-box hidden" id="healthOutputBox">
+          <pre class="json-code-display"><code id="healthJsonOutput"></code></pre>
+        </div>
+      </div>
+    </article>
+
+    <!-- Endpoint Card: POST /api/prompt/optimize -->
+    <article class="doc-endpoint-card" id="post-optimize">
+      <div class="endpoint-card-header">
+        <div class="endpoint-title-group">
+          <span class="http-badge post-badge">POST</span>
+          <span class="endpoint-path">/api/prompt/optimize</span>
+        </div>
+        <span class="endpoint-tagline">Semantic Prompt Intelligence Engine</span>
+      </div>
+      <div class="endpoint-card-body">
+        <p class="endpoint-desc">
+          Analyzes user prompts with domain-aware semantic heuristics (automotive, character, gaming, space, nature) and expands them with volumetric lighting, optical camera specifications, and negative prompt guardrails for maximum 1080p generation quality.
+        </p>
+      </div>
+    </article>
+
+    <!-- Endpoint Card: DELETE /api/history/{identifier} -->
+    <article class="doc-endpoint-card" id="delete-history">
+      <div class="endpoint-card-header">
+        <div class="endpoint-title-group">
+          <span class="http-badge post-badge" style="background: rgba(255, 68, 68, 0.2); color: #ff6b6b; border: 1px solid rgba(255,68,68,0.4)">DELETE</span>
+          <span class="endpoint-path">/api/history/{identifier}</span>
+        </div>
+        <span class="endpoint-tagline">Permanent Artifact Removal</span>
+      </div>
+      <div class="endpoint-card-body">
+        <p class="endpoint-desc">
+          Permanently removes an image artifact (<code>.png</code>) and its metadata companion (<code>.json</code>) from the server's <code>outputs/</code> archive directory.
+        </p>
+      </div>
+    </article>
+
+    <!-- Endpoint Card 4: GET /api/outputs/{filename} -->
+    <article class="doc-endpoint-card" id="get-outputs">
+      <div class="endpoint-card-header">
+        <div class="endpoint-title-group">
+          <span class="http-badge get-badge">GET</span>
+          <span class="endpoint-path">/api/outputs/{filename}</span>
+        </div>
+        <span class="endpoint-tagline">Secure Binary Asset Delivery</span>
+      </div>
+      <div class="endpoint-card-body">
+        <p class="endpoint-desc">
+          Serves verified PNG binary image artifacts with path-traversal attack protection. Returns HTTP 403 on illegal traversal attempts, and HTTP 404 if the asset does not exist.
+        </p>
+      </div>
+    </article>
+
+    <!-- Architectural Deep-Dive: Pillow Stream Integrity Gate -->
+    <section class="doc-arch-card" id="architecture">
+      <div class="arch-card-header">
+        <span class="sparkle-glyph">🛡️</span>
+        <h3 class="arch-card-title">Pillow Stream Integrity Gate Architecture</h3>
+      </div>
+      <div class="arch-card-body">
+        <p class="arch-text">
+          Network transmission interrupts, proxy truncations, or incomplete HTTP chunk streams can corrupt image payloads without throwing standard network-level errors. To guarantee zero damaged assets, the pipeline executes a mandatory scanline decoding gate:
+        </p>
+        <div class="arch-flow-diagram">
+          <div class="flow-step">
+            <span class="step-num">1</span>
+            <span class="step-title">Binary Payload Stream</span>
+            <span class="step-sub">Raw bytes received from AI provider</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step highlight-step">
+            <span class="step-num">2</span>
+            <span class="step-title">Pillow Image.open().load()</span>
+            <span class="step-sub">Forces decompression of all scanlines</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <span class="step-num">3</span>
+            <span class="step-title">BrokenDataStream Catch</span>
+            <span class="step-sub">Catches OSError / TruncatedData</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <span class="step-num">4</span>
+            <span class="step-title">Auto-Retry (Exp. Backoff)</span>
+            <span class="step-sub">Purges bad asset & retries (up to 3x)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/js/docs.js?v=1.0"></script>
+</body>
+</html>

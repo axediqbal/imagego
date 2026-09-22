@@ -1,0 +1,15 @@
+{
+  "id": "cb27e013-bf89-4287-a07b-6e0f733cfa8a",
+  "filename": "cb27e013-bf89-4287-a07b-6e0f733cfa8a.png",
+  "url": "/api/outputs/cb27e013-bf89-4287-a07b-6e0f733cfa8a.png",
+  "prompt": "Cyberpunk street in neon rain",
+  "negative_prompt": null,
+  "aspect_ratio": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "format": "PNG",
+  "style": "cyberpunk",
+  "created_at": "2026-09-22T15:15:49.527106+00:00",
+  "retry_count": 1,
+  "file_size_bytes": 1306550
+}

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ImageGo // Next-Gen Multimodal AI Studio</title>
+  <meta name="description"
+    content="State-of-the-art AI image studio ImageGo, featuring live background video, strict aspect-ratio pixel mapping, and Pillow stream integrity verification." />
+
+  <!-- Premium Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="/static/css/style.css?v=10.1" />
+</head>
+
+<body class="imagenerator-body">
+  <!-- Live Ambient Video Background -->
+  <div class="video-bg-container">
+    <video class="video-bg" autoplay loop muted playsinline poster="">
+      <source
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260815_030633_1712fc71-4979-4e14-98f9-9f95702ab3da.mp4"
+        type="video/mp4" />
+    </video>
+    <div class="video-overlay"></div>
+  </div>
+
+  <!-- Top Announcement Bar (Webflow Imagenerator rt-sign-up-offer) -->
+  <div class="top-announcement-bar">
+    <div class="announcement-content">
+      <span class="announcement-pill">IMAGEGO STUDIO</span>
+      <span class="announcement-text">Next-Gen Multimodal AI Studio • 1080p Strict Pixel Synthesis & Stream Verification</span>
+      <a href="#studio-section" class="announcement-link">Launch Studio Now →</a>
+    </div>
+  </div>
+
+  <!-- Sticky Glass Navbar (Imagenerator Style) -->
+  <header class="main-navbar">
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <div class="logo-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+            </polygon>
+          </svg>
+        </div>
+        <span class="brand-name">ImageGo<span class="brand-dot">.</span></span>
+      </a>
+
+      <!-- Center Nav Links -->
+      <nav class="nav-links-menu">
+        <a href="#studio-section" class="nav-link active">Studio</a>
+        <a href="#gallery-section" class="nav-link">Creations</a>
+        <a href="#specs-section" class="nav-link">Specifications</a>
+        <a href="/docs" target="_blank" class="nav-link">API Docs</a>
+      </nav>
+
+      <!-- Right Nav Status & Actions -->
+      <div class="nav-right-actions">
+        <div class="engine-status-pill">
+          <span class="live-dot"></span>
+          <span class="engine-label">Engine:</span>
+          <span class="engine-val" id="navEngineName">Pollinations Flux AI</span>
+        </div>
+        <button class="nav-config-btn" id="openSettingsBtn" title="Settings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
+          </svg>
+          <span>Config</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & Generator Studio Section -->
+  <main class="page-main-wrapper" id="studio-section">
+    <!-- Hero Header -->
+    <section class="hero-intro-section">
+      <div class="hero-badge animate-slide-down">
+        <span class="badge-spark spin-360-element">✦</span>
+        <span>NEXT-GENERATION MULTIMODAL AI</span>
+      </div>
+      <div class="hero-heading-wrapper">
+        <h1 class="hero-headline text-slide-up">
+          Create <span class="gradient-text">Stunning Visual Artwork</span> with Natural Language
+        </h1>
+        <div class="rt-pricing-title-star rt-change-direction rt-spin-360" title="360° Rotating Emblem">
+          <img src="/static/img/star-spin-badge.svg" width="46" height="46" alt="Rotating Star 360" class="star-spin-icon" />
+        </div>
+      </div>
+      <p class="hero-subtext text-slide-up-delayed">
+        Translate text into high-quality digital artwork. Strictly mapped pixel payloads (<code
+          class="pixel-code">1344×768</code>, <code class="pixel-code">1024×1024</code>, <code
+          class="pixel-code">768×1344</code>) prevent handshake drops, while <code
+          class="pixel-code">Image.open().load()</code> stream verification ensures 100% integrity with auto-retry.
+      </p>
+    </section>
+
+    <!-- Webflow Infinite Sliding Marquee Train with 360° Rotating Stars -->
+    <div class="rt-hero-infinite-marquee-wrap">
+      <div class="rt-marquee-track">
+        <div class="rt-home-v1-hero-maquee-train">
+          <span class="rt-about-our-vision-v1-marquee">IMAGEGO AI</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-about-our-vision-v1-marquee">1080P ARTWORK</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-about-our-vision-v1-marquee">PROMPT INTELLIGENCE</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-about-our-vision-v1-marquee">PILLOW STREAM SHIELD</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+        </div>
+        <div class="rt-home-v1-hero-maquee-train" aria-hidden="true">
+          <span class="rt-about-our-vision-v1-marquee">IMAGEGO AI</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-about-our-vision-v1-marquee">1080P ARTWORK</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-about-our-vision-v1-marquee">PROMPT INTELLIGENCE</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-about-our-vision-v1-marquee">PILLOW STREAM SHIELD</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Master Glass Studio Prompter Card (Webflow rt-image-genarator-main) -->
+    <section class="generator-studio-card">
+      <div class="studio-card-inner">
+        <!-- Webflow Top Mode Options Strip -->
+        <div class="tr-create-option-holder">
+          <div class="tr-create-option-item active" id="tabOptionAiImage">
+            <span class="option-icon">✨</span>
+            <span class="option-label">AI Image</span>
+          </div>
+          <div class="tr-create-option-item" id="tabOption1080p">
+            <span class="option-icon">📐</span>
+            <span class="option-label">1080p HD</span>
+          </div>
+          <div class="tr-create-option-item" id="tabOptionAgent">
+            <span class="option-icon">🤖</span>
+            <span class="option-label">Prompt Agent</span>
+          </div>
+          <div class="tr-create-option-item" id="tabOptionModels">
+            <span class="option-icon">⚡</span>
+            <span class="option-label">AI Models</span>
+          </div>
+          <div class="tr-create-option-item" id="tabOptionIntegrity">
+            <span class="option-icon">🛡️</span>
+            <span class="option-label">Stream Gate</span>
+          </div>
+        </div>
+
+        <!-- Main Input Row -->
+        <div class="prompter-main-input-wrap">
+          <div class="input-glow-bg"></div>
+          <div class="prompter-input-inner">
+            <div class="prompter-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+            </div>
+            <textarea id="promptInput" class="prompter-textarea" rows="3"
+              placeholder="Describe what you want to generate in detail (e.g. A cute fluffy golden retriever puppy wearing sunglasses on a sunny beach, photorealistic 8k)..."></textarea>
+
+            <div class="prompter-submit-pane">
+              <button type="button" id="generateBtn" class="generator-action-btn rt-button-main-v2">
+                <div class="rt-button-circle"></div>
+                <span class="btn-shine"></span>
+                <span class="btn-text rt-button-text" id="generateBtnText">Generate Artwork</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intelligent Prompt Agent Bar -->
+        <div class="agent-assistant-bar">
+          <div class="agent-status-left">
+            <span class="agent-pulsing-orb"></span>
+            <span class="agent-title">Prompt Agent:</span>
+            <span class="agent-state-label" id="agentStatusLabel">Neural Intent Reasoning Active (Understands Roman Urdu & Concepts)</span>
+          </div>
+          <button type="button" class="agent-refine-trigger" id="agentRefineBtn" title="Agent interprets intent, cleans typos, and translates to 1080p photorealistic directives">
+            <span>🤖 Agent Refine</span>
+          </button>
+        </div>
+
+        <!-- Prompt Enhancers & Inspiration Chips -->
+        <div class="prompt-tools-line">
+          <div class="quick-helpers">
+            <button type="button" class="helper-btn" id="randomizePromptBtn">
+              <span>🎲 Inspire Me</span>
+            </button>
+            <button type="button" class="helper-btn pulse-glow" id="aiOptimizePromptBtn" title="Intelligently expand and optimize prompt for 1080p synthesis">
+              <span>⚡ 1080p Auto-Enhance</span>
+            </button>
+            <span class="char-tracker" id="promptCharCount">0/1000</span>
+          </div>
+
+          <div class="inspiration-chips" id="inspirationChips">
+            <button type="button" class="chip-item"
+              data-prompt="A cute fluffy golden retriever puppy wearing sunglasses on a sunny beach, photorealistic 8k">
+              🐶 Beach Puppy
+            </button>
+            <button type="button" class="chip-item"
+              data-prompt="A futuristic luxury sports car racing through neon rain, cyberpunk style reflections">
+              🏎️ Cyberpunk Car
+            </button>
+            <button type="button" class="chip-item"
+              data-prompt="Gilded solarium astronomical observatory with brass celestial armillary spheres, volumetric god rays">
+              🔭 Solar Observatory
+            </button>
+            <button type="button" class="chip-item"
+              data-prompt="Surreal floating crystal pagoda above a sea of iridescent liquid mercury at sunset, cinematic mist">
+              🏯 Crystal Pagoda
+            </button>
+          </div>
+        </div>
+
+        <!-- Studio Control Parameters Shelf -->
+        <div class="studio-parameters-shelf">
+          <!-- Parameter 1: Aspect Ratio Pixel Payloads -->
+          <div class="param-block flex-2">
+            <div class="param-header">
+              <span class="param-label">ASPECT RATIO & EXACT PIXELS</span>
+              <span class="param-badge">1080p STANDARD</span>
+            </div>
+
+            <div class="aspect-ratio-pills" id="aspectRatioGrid">
+              <!-- 16:9 Landscape -->
+              <label class="ratio-pill active" data-ratio="16:9" id="aspectCard169">
+                <input type="radio" name="aspect_ratio" value="16:9" checked />
+                <div class="ratio-icon-frame frame-16-9"></div>
+                <div class="ratio-text-group">
+                  <span class="ratio-name">16:9 Landscape</span>
+                  <span class="ratio-size">1920 × 1080 px</span>
+                </div>
+              </label>
+
+              <!-- 1:1 Square -->
+              <label class="ratio-pill" data-ratio="1:1" id="aspectCard11">
+                <input type="radio" name="aspect_ratio" value="1:1" />
+                <div class="ratio-icon-frame frame-1-1"></div>
+                <div class="ratio-text-group">
+                  <span class="ratio-name">1:1 Square</span>
+                  <span class="ratio-size">1080 × 1080 px</span>
+                </div>
+              </label>
+
+              <!-- 9:16 Portrait -->
+              <label class="ratio-pill" data-ratio="9:16" id="aspectCard916">
+                <input type="radio" name="aspect_ratio" value="9:16" />
+                <div class="ratio-icon-frame frame-9-16"></div>
+                <div class="ratio-text-group">
+                  <span class="ratio-name">9:16 Vertical</span>
+                  <span class="ratio-size">1080 × 1920 px</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Parameter 2: Aesthetic Style Presets -->
+          <div class="param-block flex-2">
+            <div class="param-header">
+              <span class="param-label">ARTISTIC STYLE PRESET</span>
+              <span class="param-badge-active" id="activeStyleBadge">Cinematic</span>
+            </div>
+
+            <div class="style-pills-row" id="styleCardsGrid">
+              <button type="button" class="style-capsule active" data-style="cinematic">
+                <span class="style-dot grad-cinematic"></span>
+                <span>Cinematic</span>
+              </button>
+              <button type="button" class="style-capsule" data-style="photorealistic">
+                <span class="style-dot grad-photoreal"></span>
+                <span>Photoreal</span>
+              </button>
+              <button type="button" class="style-capsule" data-style="cyberpunk">
+                <span class="style-dot grad-cyberpunk"></span>
+                <span>Cyberpunk</span>
+              </button>
+              <button type="button" class="style-capsule" data-style="anime">
+                <span class="style-dot grad-anime"></span>
+                <span>Anime</span>
+              </button>
+              <button type="button" class="style-capsule" data-style="digital_art">
+                <span class="style-dot grad-digital"></span>
+                <span>Digital Art</span>
+              </button>
+              <button type="button" class="style-capsule" data-style="vivid">
+                <span class="style-dot grad-vivid"></span>
+                <span>Vivid</span>
+              </button>
+              <button type="button" class="style-capsule" data-style="watercolor">
+                <span class="style-dot grad-watercolor"></span>
+                <span>Watercolor</span>
+              </button>
+            </div>
+
+            <select id="styleSelect" style="display: none;">
+              <option value="cinematic" selected>cinematic</option>
+              <option value="photorealistic">photorealistic</option>
+              <option value="cyberpunk">cyberpunk</option>
+              <option value="anime">anime</option>
+              <option value="digital_art">digital_art</option>
+              <option value="vivid">vivid</option>
+              <option value="watercolor">watercolor</option>
+            </select>
+          </div>
+
+          <!-- Parameter 3: AI Engine & Model -->
+          <div class="param-block flex-2">
+            <div class="param-header">
+              <span class="param-label">AI MODEL & ENGINE</span>
+              <span class="param-badge-active" id="activeModelBadge">Flux HD (Free)</span>
+            </div>
+
+            <div class="model-select-wrapper">
+              <select id="modelSelector" class="studio-model-select">
+                <optgroup label="🌟 Free Real AI (No API Key Required)">
+                  <option value="pollinations_flux" selected>Pollinations Flux (HD • Free)</option>
+                  <option value="pollinations_sana">Pollinations Sana (Fast • Free)</option>
+                  <option value="pollinations_turbo">Pollinations Turbo (Instant • Free)</option>
+                  <option value="mock">Local Mock Engine (Offline Pillow)</option>
+                </optgroup>
+                <optgroup label="⚡ High-Resolution Pro Models (Custom API Key)">
+                  <option value="openai">OpenAI DALL-E 3 (HD Quality • Custom Key)</option>
+                  <option value="stability">Stability AI SDXL (SDXL 1024 • Custom Key)</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+
+          <!-- Parameter 4: Batch Quantity -->
+          <div class="param-block flex-1">
+            <div class="param-header">
+              <span class="param-label">BATCH (n)</span>
+              <span class="param-badge" id="batchPill">1 Image</span>
+            </div>
+
+            <div class="segmented-batch" id="countControl">
+              <button type="button" class="batch-num-btn active" data-count="1">1</button>
+              <button type="button" class="batch-num-btn" data-count="2">2</button>
+              <button type="button" class="batch-num-btn" data-count="3">3</button>
+              <button type="button" class="batch-num-btn" data-count="4">4</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic User API Key Drawer (Expands for OpenAI and Stability AI) -->
+        <div class="user-api-key-drawer hidden" id="apiKeyDrawer">
+          <div class="api-key-drawer-inner">
+            <div class="api-key-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="7.5" cy="15.5" r="5.5"></circle>
+                <path d="m21 2-9.6 9.6"></path>
+                <path d="m15.5 7.5 3 3"></path>
+              </svg>
+            </div>
+            <div class="api-key-content">
+              <div class="api-key-header">
+                <span class="api-key-title" id="apiKeyTitle">Custom API Key Configuration</span>
+                <span class="api-key-shield">🔒 Saved locally in your browser only</span>
+              </div>
+              <div class="api-key-row">
+                <input type="password" id="customApiKeyInput" class="api-key-input" placeholder="Paste your API key (e.g. sk-proj-...)" autocomplete="off" />
+                <button type="button" id="toggleApiKeyVisBtn" class="api-key-btn icon-btn" title="Toggle visibility">👁️</button>
+                <button type="button" id="saveApiKeyBtn" class="api-key-btn save-btn">Save Key</button>
+                <button type="button" id="clearApiKeyBtn" class="api-key-btn clear-btn">Clear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Collapsible Row: Negative Prompt & Pipeline Integrity Test -->
+        <div class="advanced-studio-row">
+          <!-- Negative Prompt Toggle -->
+          <div class="accordion-item flex-1">
+            <button type="button" class="accordion-trigger" id="toggleNegativePromptBtn" aria-expanded="false">
+              <span class="dot-red"></span>
+              <span>Negative Prompt Filter (Optional)</span>
+              <span class="chevron-icon">▾</span>
+            </button>
+            <div class="accordion-panel" id="negativePromptContainer">
+              <textarea id="negativePromptInput" class="glass-sub-textarea" rows="2"
+                placeholder="Elements to exclude (e.g. blurry, low quality, artifacts, watermark)..."></textarea>
+            </div>
+          </div>
+
+          <!-- Stream Integrity Audit Switch (Assignment Rubric) -->
+          <div class="audit-item flex-1">
+            <div class="audit-box">
+              <div class="audit-header">
+                <div class="audit-beacon-wrap">
+                  <span class="audit-dot"></span>
+                  <span class="audit-title">Pillow Stream Integrity Shield</span>
+                </div>
+                <span class="audit-tag">Image.open().load()</span>
+              </div>
+              <label class="switch-row">
+                <input type="checkbox" id="simulateCorruptionToggle" />
+                <span class="switch-ui-track">
+                  <span class="switch-ui-thumb"></span>
+                </span>
+                <span class="switch-ui-label">Test Auto-Retry (Simulate 1 severed data stream)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Realtime Telemetry HUD (Active during generation) -->
+    <div class="telemetry-banner hidden" id="telemetryCard">
+      <div class="telemetry-banner-top">
+        <div class="telemetry-step-wrap">
+          <div class="telemetry-spinner"></div>
+          <span class="telemetry-step-title" id="telemetryStepText">GENERATING ARTWORK STREAM...</span>
+        </div>
+        <div class="telemetry-badges">
+          <span class="telemetry-tag" id="telemetryRetryPill">Retries: 0</span>
+          <span class="telemetry-tag cyan-tag" id="telemetryDimsPill">1344 × 768 px</span>
+        </div>
+      </div>
+      <div class="telemetry-track">
+        <div class="telemetry-fill" id="telemetryProgressBar"></div>
+      </div>
+      <div class="telemetry-log-box" id="telemetryLogText">
+        Resolving aspect ratio payload -> Ready for provider handshake...
+      </div>
+    </div>
+
+    <!-- Webflow Giant Gallery Sliding Marquee with 360° Rotating Stars -->
+    <div class="rt-ai-gallery-marquee-wrap">
+      <div class="rt-ai-gallery-track">
+        <div class="rt-ai-gallery-v1-text-marquee-train">
+          <span class="rt-ai-gallery-v1-text-marquee">Artificial Intelligence Gallery</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-ai-gallery-v1-text-marquee">Generated Artwork Creations</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-ai-gallery-v1-text-marquee">1080P Multimodal Showcase</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+        </div>
+        <div class="rt-ai-gallery-v1-text-marquee-train" aria-hidden="true">
+          <span class="rt-ai-gallery-v1-text-marquee">Artificial Intelligence Gallery</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-ai-gallery-v1-text-marquee">Generated Artwork Creations</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+          <span class="rt-ai-gallery-v1-text-marquee">1080P Multimodal Showcase</span>
+          <img src="/static/img/star-spin-large.svg" alt="Star 360" class="rt-marquee-star-spin" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Section (Imagenerator Style) -->
+    <section class="gallery-showcase-section" id="gallery-section">
+      <div class="section-title-bar">
+        <div class="title-meta-wrap">
+          <h2 class="gallery-heading">Generated Creations</h2>
+          <span class="gallery-count-pill" id="artworksCounter">0 Artifacts</span>
+        </div>
+        <div class="title-action-wrap">
+          <button class="glass-action-btn" id="refreshHistoryBtn" title="Sync outputs/ directory">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            <span>Sync Archive</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Artwork Grid Container -->
+      <div class="artwork-masonry-grid" id="artworkGrid">
+        <!-- Empty State Hero -->
+        <div class="empty-showcase-card" id="emptyState">
+          <div class="empty-icon-ring">✦</div>
+          <h3 class="empty-card-title">Studio Canvas Empty</h3>
+          <p class="empty-card-desc">
+            Type your prompt above, choose your aspect ratio, and click "Generate Artwork" to see the AI generate
+            digital art.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specifications & Features Section (Webflow Template Style) -->
+    <section class="specs-feature-section" id="specs-section">
+      <div class="specs-grid">
+        <div class="spec-feature-card">
+          <div class="feature-icon">📐</div>
+          <h3 class="feature-title">Strict Aspect Ratio Mapping</h3>
+          <p class="feature-desc">16:9 Landscape maps to <code>1344×768</code>, 1:1 Square to <code>1024×1024</code>,
+            and 9:16 Vertical to <code>768×1344</code> to prevent unsupported dimension handshake failures.</p>
+        </div>
+        <div class="spec-feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3 class="feature-title">Pillow Stream Integrity Gate</h3>
+          <p class="feature-desc">Forces full scanline decoding via <code>Image.open().load()</code>. Truncated network
+            streams trigger <code>OSError: broken data stream</code>, auto-purging corrupted files and triggering retry
+            requests.</p>
+        </div>
+        <div class="spec-feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">Free Live AI Generation</h3>
+          <p class="feature-desc">Powered by Pollinations Flux AI with zero required API keys. Full adapters for OpenAI
+            DALL-E 3 and Stability AI SDXL are also integrated.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cinema Lightbox Modal -->
+  <div class="modal-backdrop-theater hidden" id="lightboxModal" role="dialog" aria-modal="true">
+    <div class="theater-window">
+      <button class="theater-close-btn" id="closeLightboxBtn" aria-label="Close Lightbox">✕</button>
+      <div class="theater-split-body">
+        <div class="theater-media-frame">
+          <img id="lightboxImage" src="" alt="Artwork Preview" />
+        </div>
+        <div class="theater-telemetry-pane">
+          <div class="pane-header">
+            <span class="pane-label">ASSET TELEMETRY</span>
+            <span class="pane-verified" id="lightboxVerification">PASSED Image.load()</span>
+          </div>
+          <div class="pane-prompt-box">
+            <span class="prompt-meta-label">PROMPT</span>
+            <p class="prompt-meta-text" id="lightboxPrompt"></p>
+          </div>
+          <div class="specs-mini-table">
+            <div class="mini-spec-row">
+              <span class="spec-k">Aspect Ratio</span>
+              <span class="spec-v cyan-color" id="lightboxRatio">16:9</span>
+            </div>
+            <div class="mini-spec-row">
+              <span class="spec-k">Dimensions</span>
+              <span class="spec-v" id="lightboxDimensions">1344 × 768 px</span>
+            </div>
+            <div class="mini-spec-row">
+              <span class="spec-k">Style Preset</span>
+              <span class="spec-v" id="lightboxStyle">Cinematic</span>
+            </div>
+            <div class="mini-spec-row">
+              <span class="spec-k">Stream Retries</span>
+              <span class="spec-v" id="lightboxRetries">0</span>
+            </div>
+            <div class="mini-spec-row">
+              <span class="spec-k">File Size</span>
+              <span class="spec-v" id="lightboxFileSize">755 KB</span>
+            </div>
+          </div>
+          <div class="pane-actions">
+            <a id="lightboxDownloadBtn" href="#" download class="pane-btn primary-pane-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download PNG</span>
+            </a>
+            <button type="button" id="lightboxCopyPromptBtn" class="pane-btn secondary-pane-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy Prompt</span>
+            </button>
+            <button type="button" id="lightboxDeleteBtn" class="pane-btn danger-pane-btn" title="Permanently delete this artwork">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+              </svg>
+              <span>Delete Artwork</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Configuration Modal -->
+  <div class="modal-backdrop-theater hidden" id="settingsModal" role="dialog" aria-modal="true">
+    <div class="settings-modal-box">
+      <div class="settings-head">
+        <h3 class="settings-title">Studio AI Provider Configuration</h3>
+        <button class="theater-close-btn" id="closeSettingsBtn" aria-label="Close Settings">✕</button>
+      </div>
+      <div class="settings-body">
+        <div class="provider-radio-stack">
+          <label class="provider-radio-tile active" data-provider="pollinations_flux">
+            <input type="radio" name="providerSelect" value="pollinations_flux" checked />
+            <div class="radio-tile-body">
+              <div class="tile-top-line">
+                <span class="tile-title">Pollinations Flux AI</span>
+                <span class="badge-free">FREE REAL AI</span>
+              </div>
+              <p class="tile-desc">High-definition live diffusion. Generates photorealistic AI images with 0 API keys required.</p>
+            </div>
+          </label>
+
+          <label class="provider-radio-tile" data-provider="pollinations_sana">
+            <input type="radio" name="providerSelect" value="pollinations_sana" />
+            <div class="radio-tile-body">
+              <div class="tile-top-line">
+                <span class="tile-title">Pollinations Sana AI</span>
+                <span class="badge-free">FREE FAST</span>
+              </div>
+              <p class="tile-desc">Ultra-efficient linear attention diffusion model. Fast response, zero API keys required.</p>
+            </div>
+          </label>
+
+          <label class="provider-radio-tile" data-provider="pollinations_turbo">
+            <input type="radio" name="providerSelect" value="pollinations_turbo" />
+            <div class="radio-tile-body">
+              <div class="tile-top-line">
+                <span class="tile-title">Pollinations Turbo AI</span>
+                <span class="badge-free">FREE INSTANT</span>
+              </div>
+              <p class="tile-desc">Sub-second accelerated generative engine for lightning-fast ideation.</p>
+            </div>
+          </label>
+
+          <label class="provider-radio-tile" data-provider="mock">
+            <input type="radio" name="providerSelect" value="mock" />
+            <div class="radio-tile-body">
+              <div class="tile-top-line">
+                <span class="tile-title">Local Mock Engine</span>
+                <span class="badge-offline">OFFLINE</span>
+              </div>
+              <p class="tile-desc">Built-in procedural artwork engine using Pillow for zero-internet testing.</p>
+            </div>
+          </label>
+
+          <label class="provider-radio-tile" data-provider="openai">
+            <input type="radio" name="providerSelect" value="openai" />
+            <div class="radio-tile-body">
+              <div class="tile-top-line">
+                <span class="tile-title">OpenAI DALL-E 3</span>
+                <span class="badge-paid">PAID API KEY</span>
+              </div>
+              <p class="tile-desc">Highest resolution & prompt comprehension. Uses your OpenAI API key.</p>
+            </div>
+          </label>
+
+          <label class="provider-radio-tile" data-provider="stability">
+            <input type="radio" name="providerSelect" value="stability" />
+            <div class="radio-tile-body">
+              <div class="tile-top-line">
+                <span class="tile-title">Stability AI (SDXL)</span>
+                <span class="badge-paid">PAID API KEY</span>
+              </div>
+              <p class="tile-desc">Direct native SDXL 1024x1024 diffusion. Uses your Stability API key.</p>
+            </div>
+          </label>
+        </div>
+
+        <!-- Custom User API Key Input Box inside Settings Modal -->
+        <div class="modal-api-key-box hidden" id="modalApiKeySection">
+          <div class="modal-api-key-header">
+            <span class="modal-api-key-label" id="modalApiKeyLabel">API Key</span>
+            <span class="api-key-shield">🔒 Stored in browser localStorage</span>
+          </div>
+          <div class="api-key-row">
+            <input type="password" id="modalApiKeyInput" class="api-key-input" placeholder="Paste your API key (e.g. sk-...)" autocomplete="off" />
+            <button type="button" id="modalToggleApiKeyVisBtn" class="api-key-btn icon-btn" title="Toggle visibility">👁️</button>
+          </div>
+          <p class="api-key-hint">This key is saved in your browser and sent with your requests so you can generate ultra-high-resolution images. It is never stored on any server or committed to Git.</p>
+        </div>
+      </div>
+      <div class="settings-footer">
+        <button class="pane-btn primary-pane-btn" id="saveSettingsBtn">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-shelf-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="/static/js/app.js?v=7.0"></script>
+</body>
+
+</html>
